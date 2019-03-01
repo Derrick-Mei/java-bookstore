@@ -13,7 +13,7 @@ import java.util.List;
 
 @Api(value = "Some value... by DKM", description = "Author Controller by DKM")
 @RestController
-@RequestMapping(value = "/author", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/authors", produces = MediaType.APPLICATION_JSON_VALUE)
 public class Authorcontroller
 {
     @Autowired

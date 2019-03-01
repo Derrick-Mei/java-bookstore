@@ -35,7 +35,7 @@ public class Datacontroller
             if (updatedBook.getSection() == null) updatedBook.setSection(foundBook.get().getSection());
             if (updatedBook.getTitle() == null) updatedBook.setTitle(foundBook.get().getTitle());
             if (updatedBook.getIsbn() == null) updatedBook.setIsbn((foundBook.get().getIsbn()));
-            if (updatedBook.getCopy() == 0) updatedBook.setCopy(foundBook.get().getCopy());
+//            if (updatedBook.getCopy() == 0) updatedBook.setCopy(foundBook.get().getCopy());
             updatedBook.setBookid(id);
             return bookrepos.save(updatedBook);
         }
@@ -80,13 +80,13 @@ public class Datacontroller
     }
 
     @DeleteMapping("/books/{id}")
-    public Book deleteBookById(@PathVariable long id)
+    public Optional<Book> deleteBookById(@PathVariable long id)
     {
         Optional<Book> foundBook = bookrepos.findById(id);
         if (foundBook.isPresent())
         {
             bookrepos.deleteById(id);
-            return foundBook.get();
+            return Optional.of(foundBook.get());
         }
         else
         {

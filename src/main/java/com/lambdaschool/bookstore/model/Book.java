@@ -19,11 +19,11 @@ public class Book
     private String isbn;
 
     @Column(nullable = true)
-    private int copy;
+    private Integer copy;
 
     //ManyToOne books to section
     @ManyToOne
-    @JoinColumn(name = "sectionid", nullable = true) //should nullable be true?  can we have a book without a section?
+    @JoinColumn(name = "sectionid") //should nullable be true?  can we have a book without a section?
     @JsonIgnoreProperties("books")
     private Section section;
 
@@ -69,12 +69,12 @@ public class Book
         this.isbn = isbn;
     }
 
-    public int getCopy()
+    public Integer getCopy()
     {
         return copy;
     }
 
-    public void setCopy(int copy)
+    public void setCopy(Integer copy)
     {
         this.copy = copy;
     }

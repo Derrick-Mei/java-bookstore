@@ -17,7 +17,7 @@ public class Section
 
     //OneToMany to books
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")  //should we have cascade? or just detach? basically should column in book be nullable
-    @JsonIgnoreProperties("section")
+    @JsonIgnoreProperties("sections")
     private Set<Book> books;
 
     public Section()

@@ -6,10 +6,12 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @Api(value = "some value by DKM", description = "Books Controller by DKM")
 @RestController
@@ -23,6 +25,12 @@ public class Bookcontroller
     public List<Book> findAllBooks()
     {
         return bookrepos.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Book> findBookById(@PathVariable long id)
+    {
+        return bookrepos.findById(id);
     }
 
 }

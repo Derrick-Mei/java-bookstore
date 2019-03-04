@@ -31,11 +31,12 @@ public class Datacontroller
         Optional<Book> foundBook = bookrepos.findById(id);
         if (foundBook.isPresent())
         {
-            if (updatedBook.getAuthors() == null) updatedBook.setAuthors(foundBook.get().getAuthors());
+            // authors returns a set.  empty sets are not null, so we have to check for length
+            if (updatedBook.getAuthors().isEmpty()) updatedBook.setAuthors(foundBook.get().getAuthors());
             if (updatedBook.getSection() == null) updatedBook.setSection(foundBook.get().getSection());
             if (updatedBook.getTitle() == null) updatedBook.setTitle(foundBook.get().getTitle());
             if (updatedBook.getIsbn() == null) updatedBook.setIsbn((foundBook.get().getIsbn()));
-//            if (updatedBook.getCopy() == 0) updatedBook.setCopy(foundBook.get().getCopy());
+            if (updatedBook.getCopy() == null) updatedBook.setCopy(foundBook.get().getCopy());
             updatedBook.setBookid(id);
             return bookrepos.save(updatedBook);
         }
@@ -65,7 +66,7 @@ public class Datacontroller
     }
 
     @PostMapping("/books/{bookid}/author/{authorid}")
-    public Optional<Author> addBookToAuthorWithBothIds(@PathVariable long bookid, @PathVariable long authorid)
+    public Optional<Author> addBookToAuthorWithBothIds(@PathVariable("bookid") long bookid, @PathVariable("authorid") long authorid)
     {
         if (bookrepos.findById(bookid).isPresent() & authorrepos.findById(authorid).isPresent())
         {
@@ -80,13 +81,14 @@ public class Datacontroller
     }
 
     @DeleteMapping("/books/{id}")
-    public Optional<Book> deleteBookById(@PathVariable long id)
+    public Book deleteBookById(@PathVariable long id)
     {
         Optional<Book> foundBook = bookrepos.findById(id);
         if (foundBook.isPresent())
         {
+            Book bookToBeDeleted = foundBook.get();
             bookrepos.deleteById(id);
-            return Optional.of(foundBook.get());
+            return bookToBeDeleted;
         }
         else
         {

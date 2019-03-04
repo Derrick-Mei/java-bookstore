@@ -3,7 +3,6 @@ package com.lambdaschool.bookstore.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,10 +17,18 @@ public class Author
 
     private String lname;
 
-    //ManyToMany to books
-    @ManyToMany(mappedBy = "authors")
+    //ManyToMany to books  Where Book owns the table
+//    @ManyToMany(mappedBy = "authors")
+//    @JsonIgnoreProperties("authors")
+//    private Set<Book> books = new HashSet<>();
+
+    //ManyToMany where Author owns the table
+    @ManyToMany
+    @JoinTable(name = "wrote",
+        joinColumns = {@JoinColumn(name = "authorid")},
+        inverseJoinColumns = {@JoinColumn(name = "bookid")})
     @JsonIgnoreProperties("authors")
-    private Set<Book> books = new HashSet<>();
+    private Set<Book> books;
 
     public Author()
     {

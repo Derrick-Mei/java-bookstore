@@ -3,7 +3,6 @@ package com.lambdaschool.bookstore.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -27,13 +26,19 @@ public class Book
     @JsonIgnoreProperties("books")
     private Section section;
 
-    //ManyToMany books to authors -> book owns table
-    @ManyToMany
-    @JoinTable(name = "wrote",
-            joinColumns = {@JoinColumn(name = "bookid")},
-            inverseJoinColumns = {@JoinColumn(name = "authorid")})
+    //ManyToMany books to authors -> where book owns table
+//    @ManyToMany
+//    @JoinTable(name = "wrote",
+//            joinColumns = {@JoinColumn(name = "bookid")},
+//            inverseJoinColumns = {@JoinColumn(name = "authorid")})
+//    @JsonIgnoreProperties("books")
+//    private Set<Author> authors = new HashSet<>();
+
+    //https://stackoverflow.com/questions/2990799/difference-between-fetchtype-lazy-and-eager-in-java-persistence-api
+    // ManyToMany where author owns the table
+    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("books")
-    private Set<Author> authors = new HashSet<>();
+    private Set<Author> authors;
 
     public Book()
     {

@@ -59,6 +59,15 @@ public class User
         this.password = password;
     }
 
+    public String getRole()
+    {
+        return role;
+    }
+
+    public void setRole(String role)
+    {
+        this.role = role;
+    }
 
     public List<SimpleGrantedAuthority> getAuthority()
     {

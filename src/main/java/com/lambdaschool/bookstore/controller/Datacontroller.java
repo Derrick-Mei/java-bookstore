@@ -61,7 +61,7 @@ public class Datacontroller
         }
         else
         {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -75,7 +75,7 @@ public class Datacontroller
         }
         else
         {
-            return null;
+            return Optional.empty();
         }
 
     }

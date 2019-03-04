@@ -12,5 +12,5 @@ public interface Bookrepository extends JpaRepository<Book, Long>
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO wrote (bookid, authorid) VALUES (:bookid, :authorid);", nativeQuery = true)
-    public void addToWrote(long bookid, long authorid);
+    void addToWrote(long bookid, long authorid);
 }

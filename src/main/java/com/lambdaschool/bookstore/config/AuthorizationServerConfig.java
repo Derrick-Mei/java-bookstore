@@ -14,17 +14,17 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class  AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter
 {
 
-    static final String CLIENT_ID = "lambda-client";
-    static final String CLIENT_SECRET = "lambda-secret";
-    static final String GRANT_TYPE_PASSWORD = "password";
-    static final String AUTHORIZATION_CODE = "authorization_code";
-    static final String REFRESH_TOKEN = "refresh_token";
-    static final String IMPLICIT = "implicit";
-    static final String SCOPE_READ = "read";
-    static final String SCOPE_WRITE = "write";
-    static final String TRUST = "trust";
-    static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
-    static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
+    private static final String CLIENT_ID = "lambda-client";
+    private static final String CLIENT_SECRET = "lambda-secret";
+    private static final String GRANT_TYPE_PASSWORD = "password";
+    private static final String AUTHORIZATION_CODE = "authorization_code";
+    private static final String REFRESH_TOKEN = "refresh_token";
+    private static final String IMPLICIT = "implicit";
+    private static final String SCOPE_READ = "read";
+    private static final String SCOPE_WRITE = "write";
+    private static final String TRUST = "trust";
+    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
+    private static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
 
     @Autowired
     private TokenStore tokenStore;
